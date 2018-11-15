@@ -1,10 +1,20 @@
-import './index.scss';
+//import './index.scss';
 import GyroNorm from 'gyronorm';
 
 let gn = new GyroNorm();
 
 console.log('gn', gn);
 
+
+gn.init().then(()=>{
+	console.log('gn did init');
+
+
+	let a = gn.isAvailable();
+
+	console.log('a', a);
+});
+/*
 gn.init().then(function(){
   gn.start(function(data){
     console.log('data', data);
@@ -29,3 +39,4 @@ gn.init().then(function(){
 }).catch(function(e){
   // Catch if the DeviceOrientation or DeviceMotion is not supported by the browser or device
 });
+*/
