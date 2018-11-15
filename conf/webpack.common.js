@@ -32,13 +32,11 @@ module.exports = {
 
   module: {
     rules: [{
-      enforce: "pre", //to check source files, not modified by other loaders (like babel-loader)
       test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "eslint-loader"
-    }, {
-      test: /\.js$/,
-      exclude: /node_modules/,
+      include: [
+        path.resolve(__dirname, "src"),
+        path.resolve(__dirname, "node_modules/bbcore")
+      ],
       use: {
         loader: 'babel-loader',
         options: {
@@ -62,6 +60,13 @@ module.exports = {
             // use style-loader in development
             fallback: "style-loader"
         })
+    },{
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+    },
+    { 
+        test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/, 
+        loader: "file-loader" 
     }]
   },
   plugins: [
@@ -72,6 +77,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
-      extractSass
+    extractSass
   ]
 };

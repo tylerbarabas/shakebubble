@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = Merge(CommonConfig, {
   plugins: [
@@ -23,6 +24,7 @@ module.exports = Merge(CommonConfig, {
         screw_ie8: true
       },
       comments: false
-    })
+    }),
+    new ImageminPlugin()
   ]
 });
