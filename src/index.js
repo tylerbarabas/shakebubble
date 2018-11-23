@@ -104,7 +104,7 @@ window.addEventListener('devicemotion', e => {
     if (RRB > 300) {
         me.score.spins++;
         ap.spin.play();
-    } else if (RRA > 500) {
+    } else if (RRA > 230) {
         me.score.legUps++;
         ap.legUp.play();
     } else if (AX > 25) {
