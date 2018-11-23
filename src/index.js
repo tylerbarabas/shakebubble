@@ -104,17 +104,13 @@ window.addEventListener('devicemotion', e => {
     if (RRB > 300) {
         me.score.spins++;
         ap.spin.play();
-    }
-    if (RRA > 500) {
+    } else if (RRA > 500) {
         me.score.legUps++;
         ap.legUp.play();
-    }
-    if (AX > 25) {
+    } else if (AX > 25) {
         me.score.assShake++;
         ap.assShake.play();
-    }
-
-    if (AZ > 15) {
+    } else if (AZ > 10) {
         me.score.crotchThrust++;
         ap.crotchThrust.play();
     }
