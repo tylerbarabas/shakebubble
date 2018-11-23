@@ -101,10 +101,10 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (RRA > 230) {
+    if (RRA > 350) {
         me.score.legUps++;
         ap.legUp.play();
-    } else if (AX > 20) {
+    } else if (AX > 15) {
         me.score.assShakes++;
         ap.assShake.play();
     } else if (RRB > 300) {
