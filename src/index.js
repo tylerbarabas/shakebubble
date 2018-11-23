@@ -82,15 +82,15 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (Math.abs(e.rotationRate.beta) > 360) {
+    if (Math.abs(e.rotationRate.beta) > 500) {
         me.score.spins++;
         this.ap.spin.play();
     }
-    if (Math.abs(e.rotationRate.gamma) > 360) {
+    if (Math.abs(e.rotationRate.gamma) > 200) {
         me.score.legUps++;
         this.ap.legUp.play();
     }
-    if (Math.abs(e.acceleration.x) > 3) {
+    if (Math.abs(e.acceleration.x) > 30) {
         me.score.assShake++;
         this.ap.assShake.play();
     }
