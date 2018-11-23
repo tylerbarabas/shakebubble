@@ -8,12 +8,25 @@ const orientation = document.getElementById('orientation');
 const rotationrate = document.getElementById('rotationrate');
 const acceleration = document.getElementById('acceleration');
 const accelerationgravity = document.getElementById('accelerationgravity');
+const THRESH = 360;
 
 let ap = {
     alpha: new Audio(Alpha),
     beta: new Audio(Beta),
     gamma: new Audio(Gamma)
 };
+
+class User {
+	constructor(){
+		this.score = {
+			assShakes: 0,
+			spins: 0,
+			crotchThrusts: 0,
+			legUps: 0
+		};
+	}
+}
+let me = new User();
 /*
 let o = 0;
 window.addEventListener('deviceorientation', e => {
@@ -24,6 +37,7 @@ window.addEventListener('deviceorientation', e => {
 let rr = 0;
 let a = 0;
 let ag = 0;
+
 window.addEventListener('devicemotion', e => {
     if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} \n y: ${e.rotationRate.beta} \n z: ${e.rotationRate.gamma} \n\n\n`;
     rr++;
@@ -34,8 +48,9 @@ window.addEventListener('devicemotion', e => {
     if (ag % 5 === 0) accelerationgravity.innerText = `Acceleration w gravity \n\n x: ${e.accelerationIncludingGravity.x} \n y: ${e.accelerationIncludingGravity.y} \n z: ${e.accelerationIncludingGravity.z} \n\n\n`;
     ag++;
 
-    if (e.rotationRate.alpha > 100) ap.alpha.play();
-    if (e.rotationRate.beta > 100) ap.beta.play();
-    if (e.rotationRate.gamma > 100) ap.gamma.play();
-
+    if (Math.abs(e.rotationRate.alpha) > THRESH) ap.alpha.play();
+    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
+    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 }, true);
+
+document.body.addEventListener('click', ()=>{ ap.alpha.play(); });
