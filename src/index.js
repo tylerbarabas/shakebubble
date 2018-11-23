@@ -66,7 +66,7 @@ let RRG = 0;
 let highestRRG = 0;
 
 let shouldTrigger = true;
-let triggerThresh = 250;
+let triggerThresh = 200;
 const triggerSafety = () => {
     shouldTrigger = false;
     setTimeout(() => {
