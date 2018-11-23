@@ -66,7 +66,7 @@ let RRG = 0;
 let highestRRG = 0;
 
 let shouldTrigger = true;
-let triggerThresh = 500;
+let triggerThresh = 250;
 const triggerSafety = () => {
     shouldTrigger = false;
     setTimeout(() => {
@@ -104,28 +104,37 @@ window.addEventListener('devicemotion', e => {
 
     if (ag % 5 === 0) accelerationgravity.innerText = `Acceleration w gravity \n\n x: ${e.accelerationIncludingGravity.x} \n y: ${e.accelerationIncludingGravity.y} \n z: ${e.accelerationIncludingGravity.z} \n\n\n`;
 
-    if (ag % 5 === 0) scoreboard.innerText = `Score \n\n Ass shakes: ${me.score.assShakes} \n Spins: ${me.score.spins} \n CrotchThrusts: ${me.score.crotchThrusts} \n Leg ups: ${me.score.legUps} \n\n\n`;
+    if (ag % 5 === 0) scoreboard.innerText = `Score \n\n Ass shakes: ${me.score.assShakes} \n Spins: ${me.score.spins} \n CrotchThrusts: ${me.score.crotchThrusts} \n Jump: ${me.score.legUps} \n\n\n`;
     ag++;
 
 //    if (Math.abs(e.rotationRate.alpha) > THRESH) ap.alpha.play();
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (shouldTrigger) {
-        if (RRA > 350) {
-            me.score.legUps++;
-            ap.legUp.play();
-        } else if (AX > 15) {
-            me.score.assShakes++;
-            ap.assShake.play();
-        } else if (RRB > 300) {
-            me.score.spins++;
-            ap.spin.play();
-        } else if (AZ > 12) {
-            me.score.crotchThrusts++;
-            ap.crotchThrust.play();
+
+    console.log('AX', AX, 'AY', AY, 'AZ', AZ, 'RRA', RRA, 'RRB', RRB, 'RRG', RRG);
+   if (shouldTrigger) {
+
+	if (AY > 13) {
+	    me.score.legUps++;
+//            ap.legUp.play();
+	} else if (AX > 5 || AZ > 3) {
+	    if (RRB < 85) {
+                me.score.crotchThrusts++;
+//                ap.crotchThrust.play();
+            } else {
+                me.score.assShakes++;
+ //               ap.assShake.play();
+	    }
         }
-        triggerSafety();
+
+
+	if (RRB > 350) {
+            me.score.spins++;
+//            ap.spin.play();
+        }
+
+	triggerSafety();
     }
 }, true);
 
