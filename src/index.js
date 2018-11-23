@@ -86,7 +86,7 @@ window.addEventListener('devicemotion', e => {
     RRG = Math.abs(e.rotationRate.gamma);
     highestRRG = (RRG > highestRRB) ? RRG : highestRRG;
 
-    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} ${highestRRA} \n y: ${e.rotationRate.beta} ${highestRRB} \n z: ${e.rotationRate.gamma} ${highestRRG} \n\n\n`;
+    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n Alpha: ${e.rotationRate.alpha} ${highestRRA} \n Beta: ${e.rotationRate.beta} ${highestRRB} \n Gamma: ${e.rotationRate.gamma} ${highestRRG} \n\n\n`;
     rr++;
 
     if (a % 5 === 0) acceleration.innerText = `Acceleration \n\n x: ${e.acceleration.x} ${highestAX} \n y: ${e.acceleration.y} ${highestAY} \n z: ${e.acceleration.z} ${highestAZ} \n\n\n`;
@@ -101,17 +101,22 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (RRB > 500) {
+    if (RRB > 400) {
         me.score.spins++;
-        this.ap.spin.play();
+        ap.spin.play();
     }
     if (RRA > 200) {
         me.score.legUps++;
-        this.ap.legUp.play();
+        ap.legUp.play();
     }
     if (AX > 30) {
         me.score.assShake++;
-        this.ap.assShake.play();
+        ap.assShake.play();
+    }
+
+    if (Az > 30) {
+        me.score.crotchThrust++;
+        ap.crotchThrust.play();
     }
 
 }, true);
