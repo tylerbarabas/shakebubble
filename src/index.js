@@ -107,11 +107,11 @@ window.addEventListener('devicemotion', e => {
     } else if (RRA > 230) {
         me.score.legUps++;
         ap.legUp.play();
-    } else if (AX > 25) {
-        me.score.assShake++;
+    } else if (AX > 20) {
+        me.score.assShakes++;
         ap.assShake.play();
-    } else if (AZ > 10) {
-        me.score.crotchThrust++;
+    } else if (AZ > 12) {
+        me.score.crotchThrusts++;
         ap.crotchThrust.play();
     }
 
