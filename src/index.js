@@ -64,6 +64,16 @@ let highestRRB = 0;
 
 let RRG = 0;
 let highestRRG = 0;
+
+let shouldTrigger = true;
+let triggerThresh = 1000;
+const triggerSafety = () => {
+    shouldTrigger = false;
+    setTimeout(() => {
+        shouldTrigger = true;
+    }, triggerThresh);
+}
+
 window.addEventListener('devicemotion', e => {
 
     AX = Math.abs(e.acceleration.x);
@@ -101,6 +111,7 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
+if (shouldTrigger) {
     if (RRA > 350) {
         me.score.legUps++;
         ap.legUp.play();
@@ -114,7 +125,8 @@ window.addEventListener('devicemotion', e => {
         me.score.crotchThrusts++;
         ap.crotchThrust.play();
     }
-
+    triggerSafety();
+}
 }, true);
 
 document.body.addEventListener('click', ()=>{ ap.alpha.play(); });
