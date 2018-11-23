@@ -47,11 +47,30 @@ let rr = 0;
 let a = 0;
 let ag = 0;
 
+let AX = 0;
+let highestAX = 0;
+
+let RRB = 0;
+let highestRRB = 0;
+
+let RRG = 0;
+let highestRRG = 0;
 window.addEventListener('devicemotion', e => {
-    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} \n y: ${e.rotationRate.beta} \n z: ${e.rotationRate.gamma} \n\n\n`;
+
+
+    AX = Math.abs(e.acceleration.x);
+    highestAX = (AX > highestAX) ? AX : highestAX;
+
+    RRB = Math.abs(e.rotationRate.beta);
+    highestRRB = (RRB > highestRRB) ? RRB : highestRRB;
+
+    RRG = Math.abs(e.rotationRate.gamma);
+    highestRRG = (RRG > highestRRB) ? RRG : highestRRG;
+
+    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} \n y: ${e.rotationRate.beta} ${highestRRB} \n z: ${e.rotationRate.gamma} ${highestRRG} \n\n\n`;
     rr++;
 
-    if (a % 5 === 0) acceleration.innerText = `Acceleration \n\n x: ${e.acceleration.x} \n y: ${e.acceleration.y} \n z: ${e.acceleration.z} \n\n\n`;
+    if (a % 5 === 0) acceleration.innerText = `Acceleration \n\n x: ${e.acceleration.x} ${highestAX} \n y: ${e.acceleration.y} \n z: ${e.acceleration.z} \n\n\n`;
     a++;
 
     if (ag % 5 === 0) accelerationgravity.innerText = `Acceleration w gravity \n\n x: ${e.accelerationIncludingGravity.x} \n y: ${e.accelerationIncludingGravity.y} \n z: ${e.accelerationIncludingGravity.z} \n\n\n`;
@@ -75,6 +94,7 @@ window.addEventListener('devicemotion', e => {
         me.score.assShake++;
         this.ap.assShake.play();
     }
+
 }, true);
 
 document.body.addEventListener('click', ()=>{ ap.alpha.play(); });
