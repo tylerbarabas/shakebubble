@@ -101,20 +101,20 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (RRB > 400) {
+    if (RRB > 500) {
         me.score.spins++;
         ap.spin.play();
     }
-    if (RRA > 200) {
+    if (RRA > 1000) {
         me.score.legUps++;
         ap.legUp.play();
     }
-    if (AX > 30) {
+    if (AX > 25) {
         me.score.assShake++;
         ap.assShake.play();
     }
 
-    if (Az > 30) {
+    if (AZ > 30) {
         me.score.crotchThrust++;
         ap.crotchThrust.play();
     }
