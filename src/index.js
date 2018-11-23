@@ -66,7 +66,7 @@ let RRG = 0;
 let highestRRG = 0;
 
 let shouldTrigger = true;
-let triggerThresh = 1000;
+let triggerThresh = 100;
 const triggerSafety = () => {
     shouldTrigger = false;
     setTimeout(() => {
@@ -111,22 +111,22 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-if (shouldTrigger) {
-    if (RRA > 350) {
-        me.score.legUps++;
-        ap.legUp.play();
-    } else if (AX > 15) {
-        me.score.assShakes++;
-        ap.assShake.play();
-    } else if (RRB > 300) {
-        me.score.spins++;
-        ap.spin.play();
-    } else if (AZ > 12) {
-        me.score.crotchThrusts++;
-        ap.crotchThrust.play();
+    if (shouldTrigger) {
+        if (RRA > 350) {
+            me.score.legUps++;
+            ap.legUp.play();
+        } else if (AX > 15) {
+            me.score.assShakes++;
+            ap.assShake.play();
+        } else if (RRB > 300) {
+            me.score.spins++;
+            ap.spin.play();
+        } else if (AZ > 12) {
+            me.score.crotchThrusts++;
+            ap.crotchThrust.play();
+        }
+        triggerSafety();
     }
-    triggerSafety();
-}
 }, true);
 
 document.body.addEventListener('click', ()=>{ ap.alpha.play(); });
