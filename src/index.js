@@ -50,6 +50,15 @@ let ag = 0;
 let AX = 0;
 let highestAX = 0;
 
+let AY = 0;
+let highestAY = 0;
+
+let AZ = 0;
+let highestAZ = 0;
+
+let RRA = 0;
+let highestRRA = 0;
+
 let RRB = 0;
 let highestRRB = 0;
 
@@ -57,9 +66,19 @@ let RRG = 0;
 let highestRRG = 0;
 window.addEventListener('devicemotion', e => {
 
-
     AX = Math.abs(e.acceleration.x);
     highestAX = (AX > highestAX) ? AX : highestAX;
+
+    AY = Math.abs(e.acceleration.y);
+    highestAY = (AY > highestAY) ? AY : highestAY;
+
+
+    AZ = Math.abs(e.acceleration.z);
+    highestAZ = (AZ > highestAZ) ? AZ : highestAZ;
+
+
+    RRA = Math.abs(e.rotationRate.alpha);
+    highestRRA = (RRA > highestRRA) ? RRA : highestRRA;
 
     RRB = Math.abs(e.rotationRate.beta);
     highestRRB = (RRB > highestRRB) ? RRB : highestRRB;
@@ -67,10 +86,10 @@ window.addEventListener('devicemotion', e => {
     RRG = Math.abs(e.rotationRate.gamma);
     highestRRG = (RRG > highestRRB) ? RRG : highestRRG;
 
-    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} \n y: ${e.rotationRate.beta} ${highestRRB} \n z: ${e.rotationRate.gamma} ${highestRRG} \n\n\n`;
+    if (rr % 5 === 0) rotationrate.innerText = `Rotation Rate: \n\n x: ${e.rotationRate.alpha} ${highestRRA} \n y: ${e.rotationRate.beta} ${highestRRB} \n z: ${e.rotationRate.gamma} ${highestRRG} \n\n\n`;
     rr++;
 
-    if (a % 5 === 0) acceleration.innerText = `Acceleration \n\n x: ${e.acceleration.x} ${highestAX} \n y: ${e.acceleration.y} \n z: ${e.acceleration.z} \n\n\n`;
+    if (a % 5 === 0) acceleration.innerText = `Acceleration \n\n x: ${e.acceleration.x} ${highestAX} \n y: ${e.acceleration.y} ${highestAY} \n z: ${e.acceleration.z} ${highestAZ} \n\n\n`;
     a++;
 
     if (ag % 5 === 0) accelerationgravity.innerText = `Acceleration w gravity \n\n x: ${e.accelerationIncludingGravity.x} \n y: ${e.accelerationIncludingGravity.y} \n z: ${e.accelerationIncludingGravity.z} \n\n\n`;
@@ -82,15 +101,15 @@ window.addEventListener('devicemotion', e => {
 //    if (Math.abs(e.rotationRate.beta) > THRESH) ap.beta.play();
 //    if (Math.abs(e.rotationRate.gamma) > THRESH) ap.gamma.play();
 
-    if (Math.abs(e.rotationRate.beta) > 500) {
+    if (RRB > 500) {
         me.score.spins++;
         this.ap.spin.play();
     }
-    if (Math.abs(e.rotationRate.gamma) > 200) {
+    if (RRA > 200) {
         me.score.legUps++;
         this.ap.legUp.play();
     }
-    if (Math.abs(e.acceleration.x) > 30) {
+    if (AX > 30) {
         me.score.assShake++;
         this.ap.assShake.play();
     }
